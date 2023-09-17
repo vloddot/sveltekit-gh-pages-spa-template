@@ -1,0 +1,1 @@
+export const prerender = false; // site cannot be prerendered due to [id]
