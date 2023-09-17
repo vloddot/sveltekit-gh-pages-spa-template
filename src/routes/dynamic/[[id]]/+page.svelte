@@ -5,7 +5,11 @@
   $: pageParams = $page.params as RouteParams;
 </script>
 
-<p>Hello, {pageParams.id}!</p>
+{#if pageParams.id == undefined}
+  <p>Hello... whoops, no ID</p>
+{:else}
+  <p>Hello, {pageParams.id}!</p>
+{/if}
 
 <p>
   Since this route is "dynamic" and isn't pre-rendered, a normal SvelteKit app
@@ -16,4 +20,4 @@
   so GitHub Pages just simply relaunches the SvelteKit router.
 </p>
 
-<p>Try refreshing the page.</p>
+<p>Try refreshing the page or going to the URL directly.</p>
