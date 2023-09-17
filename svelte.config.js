@@ -12,12 +12,12 @@ const config = {
 		// If your environment is not supported or you settled on a specific environment, switch out the adapter.
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		files: {
-			appTemplate: 'src/app.html'
+			appTemplate: 'src/404.html'
 		},
 		paths: {
 			base: process.env.NODE_ENV == 'production' ? '/sveltekit-gh-pages-spa-template' : ''
 		},
-		adapter: adapter({ fallback: 'app.html' })
+		adapter: adapter({ fallback: '404.html' })
 	}
 };
 
