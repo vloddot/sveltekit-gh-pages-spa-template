@@ -1,1 +1,0 @@
-var s;const e=((s=globalThis.__sveltekit_13tiorh)==null?void 0:s.base)??"/sveltekit-gh-pages-spa-template";var t;const a=((t=globalThis.__sveltekit_13tiorh)==null?void 0:t.assets)??e;export{a,e as b};
