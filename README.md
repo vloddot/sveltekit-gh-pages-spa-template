@@ -1,17 +1,13 @@
 # sveltekit-gh-pages-spa-template
 
 This template is built for SvelteKit SPAs on GitHub Pages, the main issue with GitHub Pages and SvelteKit SPAs
-is that GitHub Pages cannot resolve dynamic routes, meaning if you have a route like `/blog/[sjug]`, if you go
+is that GitHub Pages cannot resolve dynamic routes, if you have a route like `/blog/[sjug]`, if you go
 to it through SvelteKit's router (by lieu of an `<a>` tag or `await goto('/blog/' + slug)`) it works fine, but if you try
 refreshing the page or going to the route manually by editing the URL, GitHub Pages will return a 404.
 
-For the TL;DR on how this works, basically, instead of using SvelteKit's default `src/app.html` file to start the router,
-a `src/404.html` file is used and we set `config.kit.files.appTemplate` (which by default is `src/app.html`) to `src/404.html`.
-This does two things:
-
-1. This configures GitHub Pages in the build to create a 404 template which is coincidentally the app's router
-(See [GitHub Documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site) for more details).
-2. This configures the SvelteKit router to start in the `src/404.html` file instead of the `src/app.html` file.
+For the TL;DR on how this works, basically, we define a "fallback" page which is a page that simply starts the router,
+in GitHub Pages, if you define a `404.html` file, when it encounters a 404, it goes back to that page.
+So SvelteKit generates a file called `404.html` that starts the router if we define it in the adapter's options.
 
 ## Demo App
 
@@ -42,10 +38,6 @@ const config = {
 	preprocess: vitePreprocess(),
 
   kit: {
-    files: {
-      appTemplate: 'src/404.html' // where to start the router
-    },
-
     paths: {
       // If you're using custom domains, this can be left out. Since GitHub Pages usually has
       // a format of `<username>.github.io/<repositoryname>`, `base` needs to be set to accomodate
@@ -67,13 +59,9 @@ export const prerender = true;
 export const ssr = false;
 ```
 
-### Renaming app.html
-
-Since we edited the `404.html` in the configuration, we also need to rename the `src/app.html` file to `src/404.html`.
-
 ### Renaming routes in your project
 
-Now, we need to replace all t,e routes that are through `<a>` tags, `goto` or `redirect` with `{base}/{route}`.
+Now, we need to replace all the routes that are through `<a>` tags, `goto` or `redirect` with `{base}/{route}`.
 So if you are trying to route to `/blog/[slug]`, you need to add `{base}/blog/{slug}` (and `import { base } from '$app/paths'`)
 instead of `/blog/{slug}` since without the `{base}`, in production code (GitHub Pages), it will try to route to `/blog/[slug]` which
 doesn't exist, what exists however is `/<repositoryname>/blog/[slug]`.
