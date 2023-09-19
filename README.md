@@ -61,7 +61,8 @@ export const ssr = false;
 
 ### Renaming routes in your project
 
-Now, we need to replace all the routes that are through `<a>` tags, `goto` or `redirect` with `{base}/{route}`.
+If you're not using a custom domain (not `<username>.github.io/<repositoryname>`) and edited the `base` value in the SvelteKit configuration,
+you need to replace all the routes that are through `<a>` tags, `goto` or `redirect` with `{base}/{route}`.
 So if you are trying to route to `/blog/[slug]`, you need to add `{base}/blog/{slug}` (and `import { base } from '$app/paths'`)
 instead of `/blog/{slug}` since without the `{base}`, in production code (GitHub Pages), it will try to route to `/blog/[slug]` which
 doesn't exist, what exists however is `/<repositoryname>/blog/[slug]`.
