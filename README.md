@@ -66,3 +66,5 @@ you need to replace all the routes that are through `<a>` tags, `goto` or `redir
 So if you are trying to route to `/blog/[slug]`, you need to add `{base}/blog/{slug}` (and `import { base } from '$app/paths'`)
 instead of `/blog/{slug}` since without the `{base}`, in production code (GitHub Pages), it will try to route to `/blog/[slug]` which
 doesn't exist, what exists however is `/<repositoryname>/blog/[slug]`.
+
+> Note that this isn't necessary for relative routes so if you are making a dynamic route, something like `/blog/[slug]` and `/blog/foo` has a "relative route", an `<a>` tag with `href="bar"`, there's no need to change it, since it will simply replace the current slug with `bar` when navigating to it.
