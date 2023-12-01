@@ -1,7 +1,7 @@
 # sveltekit-gh-pages-spa-template
 
 This template is built for SvelteKit SPAs on GitHub Pages, the main issue with GitHub Pages and SvelteKit SPAs
-is that GitHub Pages cannot resolve dynamic routes, if you have a route like `/blog/[sjug]`, if you go
+is that GitHub Pages cannot resolve dynamic routes, if you have a route like `/blog/[slug]`, if you go
 to it through SvelteKit's router (by lieu of an `<a>` tag or `await goto('/blog/' + slug)`) it works fine, but if you try
 refreshing the page or going to the route manually by editing the URL, GitHub Pages will return a 404.
 
